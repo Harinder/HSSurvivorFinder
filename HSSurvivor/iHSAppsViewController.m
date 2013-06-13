@@ -21,6 +21,7 @@
 {
     HSSurvivorView * _survivorView;
 }
+
 @property(nonatomic, strong) HSSurvivorView * survivorView;
 
 @end
