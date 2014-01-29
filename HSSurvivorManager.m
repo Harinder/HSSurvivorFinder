@@ -48,7 +48,7 @@
 {
     if(![HSSurvivorManager isValidNumberOfChairs:_numberOfChairs]) {
         NSError *error = [NSError errorWithDomain:@"Error!" code:1
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Please enter valid number of chairs" forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Please enter valid number of chairs"}];
         block(nil, error);
 
         return;
@@ -79,7 +79,7 @@
          else
          {
             NSError *error = [NSError errorWithDomain:@"SurvivorNotFoundError" code:2
-                                             userInfo:[NSDictionary dictionaryWithObject:@"Couldn't find survivor's chair." forKey:NSLocalizedDescriptionKey]];
+                                             userInfo:@{NSLocalizedDescriptionKey: @"Couldn't find survivor's chair."}];
             block(nil, error);
          }
        
@@ -121,14 +121,14 @@ int (^findSurvivor)(NSArray *, BOOL) = ^(NSArray * arrChairs, BOOL isRemovable) 
     
     //  if only one left in array, return it. Survivor is found
     if(arrChairs.count == 1)
-        return [[arrChairs objectAtIndex:0] integerValue];
+        return [arrChairs[0] integerValue];
     
     
     [arrChairs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         if (_isRemovable) //If removeable, add element in new array, and set isRemoveable = false
         {
-            [arrItemsTemp addObject:[arrChairs objectAtIndex:idx]];
+            [arrItemsTemp addObject:arrChairs[idx]];
             _isRemovable = !_isRemovable;
         }
         else //else, set isRemoveable = true for every next element

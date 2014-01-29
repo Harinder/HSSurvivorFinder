@@ -54,7 +54,13 @@
 -(void)initialSetup
 {
     self.view.backgroundColor = kBackgroundColor;
-    self.navigationController.navigationBar.tintColor = kBackgroundColor;
+    
+    //iOS 7 navigation issue fixes
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.navigationController.navigationBar.translucent = NO;
+    }
+    
     _survivorView = [[HSSurvivorView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _survivorView.delegate = self;
     [self.view addSubview:_survivorView];
@@ -63,6 +69,11 @@
     self.navigationItem.titleView = titleLabel;
     
     [self setRoundedCornersOfViewController];
+    
+    self.navigationController.navigationBar.tintColor = kBackgroundColor;
+    self.navigationController.navigationBar.barTintColor = kBackgroundColor;
+    
+
 }
 
 

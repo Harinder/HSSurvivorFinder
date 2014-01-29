@@ -87,7 +87,7 @@
         self.activityView.hidesWhenStopped = YES;
         
         if ([self.activityView respondsToSelector:@selector(setColor:)]) { // IOS5 or greater
-            [self.activityView.layer setValue:[NSNumber numberWithFloat:0.7f] forKeyPath:@"transform.scale"];
+            [self.activityView.layer setValue:@0.7f forKeyPath:@"transform.scale"];
         }
         
         [self.contentView addSubview:self.activityView];
